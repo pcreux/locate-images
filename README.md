@@ -1,4 +1,4 @@
-# Locate::Images
+# locate-images
 
 ## This is coding challenge!
 
@@ -16,23 +16,17 @@ Feel free to use any gem(s) you like in your submission.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'locate-images'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
     $ gem install locate-images
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+$> locate-images
+
+Usage: locate-images [options] [directory]
+    -f, --format FORMAT              csv by default. Accepts `csv` or `html`
+    -o, --output FILE                stdout by default
+```
 
 ## Development
 
