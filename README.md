@@ -1,6 +1,8 @@
 # locate-images
 
-## This is coding challenge!
+## This is a coding challenge!
+
+### Instructions
 
 Using Ruby, create a command line application that recursively reads all of the images from the supplied directory of images,
 extracts their EXIF GPS data (longitude and latitude), and then writes the name of that image and any GPS co-ordinates it finds to a CSV file.
@@ -12,6 +14,14 @@ With no parameters, the utility should default to scanning from the current dire
 As a bonus, output either CSV or HTML, based on a parameter passed in via the command line.
 
 Feel free to use any gem(s) you like in your submission.
+
+### Notes
+
+* There is a spec directory... but no specs. :-|
+* Images are lazy loaded, so it should support directories without
+  thousands of images
+* I would love to make the html output display the image and link to
+  google maps.
 
 
 ## Installation
