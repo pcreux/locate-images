@@ -1,9 +1,7 @@
 module LocateImages
   class CLI
     def self.run
-      ListImages.call(directory: "gps_images").each do |path|
-        p LoadImage.call(path: path)
-      end
+      puts GenerateCSV.call(image_paths: ListImages.call(directory: "gps_images"))
     end
   end
 end

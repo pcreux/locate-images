@@ -1,5 +1,6 @@
 require 'pathname'
 require 'exifr'
+require 'csv'
 
 require "locate_images/version"
 require "locate_images/cli"
@@ -33,6 +34,28 @@ module LocateImages
       end
 
       image
+    end
+  end
+
+  class GenerateCSV
+    def self.call(image_paths:, output: $stdout)
+      output.puts ["Path", "Lat", "Long"].to_csv
+
+      image_paths.each do |image_path|
+        new(image_path: image_path, output: output).call
+      end
+    end
+
+    attr_reader :image_path, :output
+
+    def initialize(image_path:, output: $stdout)
+      @image_path = image_path
+      @output = output
+    end
+
+    def call
+      image = LoadImage.call(path: image_path)
+      output.puts [image.path, image.lat, image.long].to_csv
     end
   end
 end
