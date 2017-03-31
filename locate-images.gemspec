@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'locate/images/version'
+require 'locate_images/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "locate-images"
-  spec.version       = Locate::Images::VERSION
+  spec.version       = LocateImages::VERSION
   spec.authors       = ["Philippe Creux"]
   spec.email         = ["pcreux@gmail.com"]
 

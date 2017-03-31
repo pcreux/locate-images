@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Locate::Images do
+describe LocateImages do
   it "has a version number" do
-    expect(Locate::Images::VERSION).not_to be nil
+    expect(LocateImages::VERSION).not_to be nil
   end
 
   it "does something useful" do
