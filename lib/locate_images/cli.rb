@@ -13,14 +13,14 @@ module LocateImages
     end
 
     def initialize_default_options
-      @directory = ARGV[0] || "."
+      @directory = "."
       @format = "csv"
       @output = $stdout
     end
 
     def parse_options
       OptionParser.new do |opts|
-        opts.banner = "Usage: example.rb [options]"
+        opts.banner = "Usage: locate-images [options] [directory]"
 
         opts.on("-f", "--format FORMAT", ["csv", "html"], "csv by default. Accepts `csv` or `html`") do |f|
           @format = f
@@ -30,6 +30,14 @@ module LocateImages
           @output = File.open(f, 'w')
         end
       end.parse!
+
+      @directory = ARGV[0] if ARGV[0]
+
+      raise "You can only pass one directory" if ARGV.size > 1
+
+    rescue => e
+      puts e.message
+      exit 1
     end
 
     def run
