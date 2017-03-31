@@ -4,9 +4,11 @@ require "locate_images/cli"
 require 'pathname'
 
 module LocateImages
-  class ListFiles
+  class ListImages
     def self.call(directory: ".")
-      Dir[Pathname.new(directory) + "*"].select { |path| !File.directory?(path) }
+      Dir[Pathname.new(directory) + "*"].select do |path|
+        !File.directory?(path) && [".jpg", ".jpeg"].include?(File.extname(path))
+      end
     end
   end
 
