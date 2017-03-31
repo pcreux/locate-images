@@ -41,7 +41,11 @@ module LocateImages
     end
 
     def run
-      formatter.call(image_paths: ListImages.call(directory: @directory), output: @output)
+      formatter.call(images: images, output: @output)
+    end
+
+    def images
+      LoadImages.call(image_paths: ListImages.call(directory: @directory))
     end
 
     def formatter
