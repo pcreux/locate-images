@@ -37,7 +37,21 @@ module LocateImages
     end
   end
 
-  class GenerateCSV
+  class OutputFormatter
+    attr_reader :image_path, :output
+
+    def initialize(image_path:, output: $stdout)
+      @image_path = image_path
+      @output = output
+      @image = LoadImage.call(path: image_path)
+    end
+
+    private
+
+    attr_reader :image
+  end
+
+  class GenerateCSV < OutputFormatter
     def self.call(image_paths:, output: $stdout)
       output.puts ["Path", "Lat", "Long"].to_csv
 
@@ -46,16 +60,32 @@ module LocateImages
       end
     end
 
-    attr_reader :image_path, :output
+    def call
+      output.puts [image.path, image.lat, image.long].to_csv
+    end
+  end
 
-    def initialize(image_path:, output: $stdout)
-      @image_path = image_path
-      @output = output
+  class GenerateHTML < OutputFormatter
+    def self.call(image_paths:, output: $stdout)
+      output.puts "<html>"
+      output.puts "<body>"
+      output.puts "<table>"
+
+      image_paths.each do |image_path|
+        new(image_path: image_path, output: output).call
+      end
+
+      output.puts "</table>"
+      output.puts "</body>"
+      output.puts "</html>"
     end
 
     def call
-      image = LoadImage.call(path: image_path)
-      output.puts [image.path, image.lat, image.long].to_csv
+      output.puts "<tr>"
+      output.puts "<td>#{image.path}</td>"
+      output.puts "<td>#{image.lat}</td>"
+      output.puts "<td>#{image.long}</td>"
+      output.puts "</tr>"
     end
   end
 end
