@@ -1,7 +1,8 @@
+require 'pathname'
+require 'exifr'
+
 require "locate_images/version"
 require "locate_images/cli"
-
-require 'pathname'
 
 module LocateImages
   class ListImages
@@ -13,7 +14,7 @@ module LocateImages
   end
 
   class Image
-    attr_reader :path, :lat, :long
+    attr_accessor :path, :lat, :long
 
     def initialize(path:, lat:nil, long:nil)
       @path = path
@@ -24,7 +25,14 @@ module LocateImages
 
   class LoadImage
     def self.call(path:)
-      Image.new(path: path)
+      image = Image.new(path: path)
+
+      if gps = EXIFR::JPEG.new(path).gps
+        image.lat  = gps.latitude
+        image.long = gps.longitude
+      end
+
+      image
     end
   end
 end
