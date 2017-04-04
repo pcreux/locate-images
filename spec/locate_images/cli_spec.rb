@@ -22,7 +22,7 @@ describe "locate-images CLI" do
 
   describe "locate-images -o spec/csv.out" do
     it "locates images in the current directory and outputs a csv to a file" do
-      output = run!("-o spec/csv.out")
+      output = run!("-o csv.out")
       expect(output).to eq("")
 
       file_content = File.read("spec/csv.out")
@@ -36,16 +36,16 @@ describe "locate-images CLI" do
 
   describe "locate-images spec/gps_images/cats" do
     it "locates images in the directory passed in" do
-      output = run!("spec/gps_images/cats")
+      output = run!("gps_images/cats")
       expect(output).to eq("Path,Lat,Long
-spec/gps_images/cats/image_e.jpg,59.924755555555556,10.695597222222222
+gps_images/cats/image_e.jpg,59.924755555555556,10.695597222222222
 ")
     end
   end
 
   describe "locate-images -f html -o spec/html.out spec/gps_images/cats" do
     it "does it all" do
-      output = run!("-f html -o spec/html.out spec/gps_images/cats")
+      output = run!("-f html -o html.out spec/gps_images/cats")
       expect(output).to eq("")
 
       file_content = File.read("spec/html.out")
@@ -58,6 +58,6 @@ spec/gps_images/cats/image_e.jpg,59.924755555555556,10.695597222222222
   end
 
   def run!(options="")
-    `./exe/locate-images #{options}`
+    `cd spec && ../exe/locate-images #{options}`
   end
 end
