@@ -8,7 +8,7 @@ require "locate_images/cli"
 module LocateImages
   class ListImages
     def self.call(directory: ".")
-      Dir[Pathname.new(directory) + "**" + "*"].select do |path|
+      Dir[Pathname.new(directory) + "**" + "*"].sort.select do |path|
         !File.directory?(path) && [".jpg", ".jpeg"].include?(File.extname(path))
       end
     end
