@@ -1,3 +1,5 @@
+require 'fileutils'
+
 describe "locate-images CLI" do
 
   describe "locate-images" do
