@@ -3,6 +3,7 @@
 ## This is a coding challenge!
 
 [![CircleCI](https://circleci.com/gh/pcreux/locate-images.svg?style=svg)](https://circleci.com/gh/pcreux/locate-images)
+[![Code Climate](https://codeclimate.com/github/pcreux/locate-images/badges/gpa.svg)](https://codeclimate.com/github/pcreux/locate-images)
 
 
 ### Instructions
